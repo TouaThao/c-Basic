@@ -8,17 +8,21 @@ namespace c_Project
         static void Main(string[] args)
         {
             /// store a variable that take our location
-            string workingFolder = @"/Users/touathao/Desktop/Pratice/C#/c#Project/fileName.txt";
+            string workingFolder = @"/Users/touathao/Desktop/Pratice/C#/c#Project/";
             //use StreamReader sr and create a new StreamReader that take in our variable
-            StreamReader sr = new StreamReader(workingFolder);
-            //Now read our StreamReader sr
+            //WorkingFolder
+            StreamReader sr = new StreamReader(workingFolder + "fileName.txt");
+            //Now we create a string call line and we set it to empty
+            StreamWriter sw = new StreamWriter(workingFolder + "fileNameReader.txt");
             string line = string.Empty;
-
+            //While loop.
             while ((line = sr.ReadLine()) != null)
             {
-                string s = line;
+                sw.WriteLine(line);
+                
             }
-
+            sr.Close();
+            sw.Close();
                 Console.WriteLine("Hello World");
         }
     }
