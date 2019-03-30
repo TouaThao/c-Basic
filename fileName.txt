@@ -1,3 +1,5 @@
-Ninja
-Samurai
-Geisha
+1,Ninja,Male
+2,Samurai,Male
+3,Geisha,Female
+4,Seiko,Male
+5,kunoichi,Female
