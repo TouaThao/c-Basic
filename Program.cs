@@ -1,6 +1,27 @@
-﻿using System;
+﻿//A name space
+using System;
+// Use
 using System.IO;
+//
 using System.Collections.Generic;
+//
+using System.Linq;
+
+//**************/
+//Your task with creating a file that take in all the employee and 
+// filter them by ID,Name,and Gender
+//**************/
+
+//Create the class/Constructor so we could use it
+//If we add public it mean anyone anywhere could see it
+//So we're going to added it to the string
+public class Customer
+{
+    public string ID;
+    public string Name;
+    public string Gender;
+
+}
 
 namespace c_Project
 {
@@ -8,9 +29,51 @@ namespace c_Project
     {
         static void Main(string[] args)
         {
-            List<Customer> myCustomerList = new List<Customer>();
-         myCustomerList = GetCustomerFromFile();
-         Console.WriteLine("Hello World");
+            //Create a new List that have property of Customer and we call it FullCustomerList
+            // we set FullCustomerList to the function GetCustomerFromFile()
+            List<Customer> FullCustomerList = new List<Customer>();
+            FullCustomerList = GetCustomerFromFile();
+
+            //Create a new list that have property of Customer and we call it women
+            //Now we set Women to FullCustomerList and filter it with .Where
+            //And with .where we set a variable x
+            //And that variable X return(=>) any x person with a gender == "Female"
+            List<Customer> Women = new List<Customer>();
+            Women = FullCustomerList.Where(x => x.Gender == "Female").ToList();
+
+            //Now create a streamWriter to create the collected data into a new file
+            //Create one for female
+            StreamWriter sw1 = new StreamWriter(@"/Users/touathao/Desktop/Pratice/C#/c#Project/women.txt");
+
+            //Now loop through it
+            //Take property of Customer i.e id,name,gender
+            // And name it myLady.
+            // and use the file in Women where we filter already.
+            foreach(Customer mylady in Women){
+                sw1.WriteLine(mylady.ID + " " + mylady.Name + " " + mylady.Gender);
+            }
+            //Close the StreamWriter
+            sw1.Close();
+            //Create a new list that have property of Customer and we call it Men
+            //Now we set Men to FullCustomerList and filter it with .Where
+            //And with .where we set a variable x
+            //And that variable X return(=>) any x person with a gender == "Male"
+            List<Customer> Men = new List<Customer>();
+            Men = FullCustomerList.Where(x => x.Gender == "Male").ToList();
+
+            //Create a new StreamWritter for men
+            StreamWriter sw2 = new StreamWriter(@"/Users/touathao/Desktop/Pratice/C#/c#Project/men.txt");
+
+            //Loop through it
+            //Take property of Customer 
+            //Name it myDude
+            //And take it from Men where we filter it
+            //And use SW to writeLine
+            foreach(Customer myDude in Men){
+                sw2.WriteLine(myDude.ID + " " + myDude.Name+ " "+ myDude.Gender);
+            }
+            sw2.Close();
+            
         }
         static public List<Customer> GetCustomerFromFile()
         {
@@ -49,19 +112,9 @@ namespace c_Project
             //Also we need to return myCustomerList.
             sr.Close();
             sw.Close();
-            
+
             return myCustomerList;
         }
-       
+
     }
-}
-
-//If we add public it mean anyone anywhere could see it
-//So we're going to added it to the string
-public class Customer
-{
-    public string ID;
-    public string Name;
-    public string Gender;
-
 }
